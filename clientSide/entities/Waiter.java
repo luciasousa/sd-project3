@@ -1,9 +1,7 @@
 package clientSide.entities;
 import java.rmi.*;
-
 import commInfra.Request;
 import interfaces.*;
-import genclass.GenericIO;
 
 /**
  *    Waiter thread.
@@ -80,55 +78,226 @@ public class Waiter extends Thread{
         ////System.out.println("waiter thread");
         while(true)
         {
-            Request r = barInterface.lookAround();
+            Request r = lookAround();
             switch(r.getRequestType()) 
             {
                 case 'c': //client arriving
                     //System.out.println("client arriving - 'c'");
                     //System.out.printf("salute client %d\n",r.getRequestID());
-                    tableInterface.saluteTheClient(r);
+                    saluteTheClient(r.getRequestID());
                     //System.out.println("return to bar");
-                    barInterface.returnToBar();
+                    returnToBar();
                     break;
                 
                 case 'o': //order ready to be collected
                     //System.out.println("order ready to be collected - 'o'");
                     //System.out.println("get the pad");
-                    tableInterface.getThePad();
+                    getThePad();
                     //System.out.println("hand note to chef");
-                    kitchenInterface.handTheNoteToChef();
+                    handTheNoteToChef();
                     //System.out.println("return to bar");
-                    barInterface.returnToBar();
+                    returnToBar();
                     break;
                 
                 case 'p': //portion ready to be collected
                     //System.out.println("portion ready to be collected - 'p'");
-                    if(!tableInterface.haveAllClientsBeenServed())
+                    if(!haveAllClientsBeenServed())
                     {
                         //System.out.println("collect portion");
-                        barInterface.collectPortion();
+                        collectPortion();
                         //System.out.println("deliver portion");
-                        tableInterface.deliverPortion();
+                        deliverPortion();
                         //System.out.println("return to bar");
-                        barInterface.returnToBar();
+                        returnToBar();
                     }
                     break;
 
                 case 'b': //bill presentation
                     //System.out.println("bill presentation - 'b'");
                     //System.out.println("prepare bill");
-                    barInterface.prepareTheBill();
+                    prepareTheBill();
                     //System.out.println("present bill");
-                    tableInterface.presentTheBill();
+                    presentTheBill();
                     //System.out.println("return to bar");
-                    barInterface.returnToBar();
+                    returnToBar();
                     break;
                     
                 case 'g': //say goodbye to students
                     //System.out.println("say goodbye to students - 'g'");
-                    int numberOfStudentsInRestaurant = barInterface.sayGoodbye(r);
+                    int numberOfStudentsInRestaurant = sayGoodbye(r.getRequestID());
                     if(numberOfStudentsInRestaurant == 0) return;
             }
         }
+    }
+    /**
+     *    Operation look around
+     *
+     *    Called by the waiter to look around
+     *    waits until has requests
+     *    @return the request read from the queue
+     * 
+     */
+    public Request lookAround(){
+        try {
+            return barInterface.lookAround();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     *    Operation salute the client
+     *
+     *    Called by the waiter to salute the client
+     * 
+     *    @param studentID the ID of the student to be saluted by the waiter
+     */
+    public void saluteTheClient(int studentID){
+        try {
+            tableInterface.saluteTheClient(studentID);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *    Operation return to bar
+     *
+     *    Called by the waiter to return to the bar
+     * 
+     */
+    public void returnToBar(){
+        try {
+            barInterface.returnToBar();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *    Operation get the pad
+     *
+     *    Called by the waiter to get the pad
+     *    signal student that he got the pad and waits until student describes the order
+     * 
+     */
+    public void getThePad(){
+        try {
+            tableInterface.getThePad();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *    Operation hand note to the chef
+     *
+     *    Called by the waiter to hand note to the chef
+     *    signals chef that note is available
+     *    waiter waits until chef starts preparation
+     *    
+     */
+    public void handTheNoteToChef(){
+        try {
+            kitchenInterface.handTheNoteToChef();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *    Operation have all clients been served
+     *
+     *    Called by the waiter to check if all clients have been served
+     *    @return boolean
+     */
+    public boolean haveAllClientsBeenServed(){
+        try {
+            return tableInterface.haveAllClientsBeenServed();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     *    Operation collect portion
+     *
+     *    Called by the waiter to collect portion
+     *    and informing chef in the kitchen that portion was collected
+     * 
+     */
+    public void collectPortion(){
+        try {
+            barInterface.collectPortion();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *    Operation deliver portion
+     *
+     *    Called by the waiter to deliver portion
+     *    signals students that portion was delivered
+     *    waits for all students to eat the course
+     * 
+     */
+    public void deliverPortion(){
+        try {
+            tableInterface.deliverPortion();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *    Operation prepare the bill
+     *
+     *    Called by the waiter to prepare the bill
+     * 
+     */
+    public void prepareTheBill(){
+        try {
+            barInterface.prepareTheBill();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *    Operation present the bill
+     *
+     *    Called by the waiter to present the bill
+     *    signals last student that bill is ready
+     *    waits for student to pay
+     * 
+     */
+    public void presentTheBill(){
+        try {
+            tableInterface.presentTheBill();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *    Operation say goodbye
+     *
+     *    Called by the waiter to say goodbye to the student
+     *    signals student that waiter said goodbye
+     * 
+     *    @param studentID student id
+     *    @return number of students in restuarant
+     *    
+     */
+    public int sayGoodbye(int studentID){
+        try {
+            return barInterface.sayGoodbye(studentID);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 }

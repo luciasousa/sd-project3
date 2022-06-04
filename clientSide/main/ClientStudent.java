@@ -1,7 +1,6 @@
 package clientSide.main;
 import java.rmi.registry.*;
 import java.rmi.*;
-import java.rmi.server.*;
 import clientSide.entities.*;
 import serverSide.main.*;
 import interfaces.*;
