@@ -171,6 +171,7 @@ public class Student extends Thread{
      *    puts a request for the waiter 
      *    signals waiter 
      *    while students are waiting to take a seat at the table
+     *    @param studentID student id
      *    @return array of the students IDs in order of arrival
      * 
      */
@@ -188,7 +189,7 @@ public class Student extends Thread{
      *    Operation read menu
      *
      *    Called by the student to read the menu, wakes up waiter to signal that he has read the menu
-     * 
+     *    @param studentID student id
      */
     public void readMenu(int studentID){
         try {
@@ -203,7 +204,7 @@ public class Student extends Thread{
      *
      *    Called by the student (that was not the first to arrive) to inform companion
      *    Signal first student that it has been informed and waits for the course to be ready
-     * 
+     *    @param studentID student id
      */
     public void informCompanion(int studentID){
         try {
@@ -218,7 +219,7 @@ public class Student extends Thread{
      *
      *    Called by the first student to arrive to prepare the order
      *    waits until gets the choices from companions
-     * 
+     *    @param studentID student id
      */
     public void prepareTheOrder(int studentID){
         try {
@@ -232,7 +233,7 @@ public class Student extends Thread{
      *    Operation has everybody chosen
      *
      *    Called by the first student to arrive to check if every companion has chosen
-     *    @return boolean
+     *    @return true if everybody has chosen
      * 
      */
     public boolean hasEverybodyChosen(){
@@ -249,7 +250,7 @@ public class Student extends Thread{
      *
      *    Called by the first student to arrive to add up the companion's choice to the order
      *    waits until gets the choices from companions
-     * 
+     *    @param studentID student id
      */
     public void addUpOnesChoice(int studentID){
         try {
@@ -266,7 +267,8 @@ public class Student extends Thread{
      *    puts a request for the waiter
      *    signals waiter waiting in lookaround
      *    while students are waiting in the table for waiter to get the pad
-     * 
+     *    @param studentID student id
+     *    @param studentState student state
      */
     public void callWaiter(int studentID, int studentState){
         try {
@@ -295,8 +297,8 @@ public class Student extends Thread{
      *    Operation join the talk
      *
      *    Called by the first student to arrive to join the talk
-     *    waits until course is ready
-     * 
+     *    waits until course is ready  
+     *    @param studentID student id
      */
     public void joinTheTalk(int studentID){
         try {
@@ -311,7 +313,7 @@ public class Student extends Thread{
      *
      *    Called by the student to start eating
      *    waits a random time
-     * 
+     *    @param studentID student id
      */
     public void startEating(int studentID){
         try {
@@ -325,7 +327,7 @@ public class Student extends Thread{
      *    Operation end eating
      *
      *    Called by the student to end eating
-     * 
+     *    @param studentID student id
      */
     public void endEating(int studentID){
         try {
@@ -342,7 +344,7 @@ public class Student extends Thread{
      *    signals waiter that everybody finished eating
      *    waits for next course to be ready
      * 
-     *    @return boolean
+     *    @return true if everybody has finished false otherwise
      */
     public boolean hasEverybodyFinished(){
         try {
@@ -370,6 +372,7 @@ public class Student extends Thread{
      *    Operation wait For Course To Be Ready
      *
      *    Called by the student to wait for next course.
+     *    @param studentID student id
      */
     public void waitForCourseToBeReady(int studentID){
         try {
@@ -384,7 +387,7 @@ public class Student extends Thread{
      *
      *    Called by the students(except for the last one) to wait for payment
      *    students wait for last student to pay the bill
-     * 
+     *    @param studentID student id
      */
     public void waitForPayment(int studentID){
         try {
@@ -400,7 +403,7 @@ public class Student extends Thread{
      *    Called by the last student to signal the waiter after everybody eaten and is time to pay
      *    puts a request for the waiter
      *    signals waiter waiting in lookaround
-     *    
+     *    @param studentID student id
      */
     public void signalTheWaiter(int studentID){
         try {
@@ -415,7 +418,7 @@ public class Student extends Thread{
      *
      *    Called by the last student to arrive to pay the bill
      *    student waits for the bill to be ready
-     * 
+     *    @param studentID student id
      */
     public void shouldHaveArrivedEarlier(int studentID)
     {
@@ -448,6 +451,7 @@ public class Student extends Thread{
      *    puts a request for the waiter
      *    signals waiter waiting in lookaround
      *    waits for waiter to say goodbye 
+     *    @param studentID student id
      * 
      */
     public void exit(int studentID){

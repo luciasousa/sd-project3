@@ -110,7 +110,7 @@ public class Chef extends Thread{
      *    Operation get first course
      *
      *    Called by the chef to get first course
-     *    @return boolean value for the first course
+     *    @return true if it is the first course false otherwise
      *    
      */
     public boolean getFirstCourse(){ 
@@ -159,7 +159,7 @@ public class Chef extends Thread{
      *    Operation chef wait for collection
      *
      *    Called by the waiter for chef to wait for collection of the portion
-     *    
+     *    @param chefState chef state
      */
     public synchronized void chefWaitForCollection(int chefState)
     {
@@ -175,6 +175,7 @@ public class Chef extends Thread{
      *
      *    Called by the waiter to inform that portion was collected
      *    signals chef that portion was collected
+     *     @param waiterState waiter state
      *    
      */
     public synchronized void portionHasBeenCollected(int waiterState)

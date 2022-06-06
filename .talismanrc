@@ -1,0 +1,22 @@
+fileignoreconfig:
+- filename: BarDeployAndRun.sh
+  checksum: b992220905418500c6fb8974cd24594bfa153441c50945ab1bfb826492b937ec
+- filename: ChefDeployAndRun.sh
+  checksum: 01394ccde5e47ca7c3955fb57d532cf733119fd45269cb62dbda8872aa777685
+- filename: GeneralReposDeployAndRun.sh
+  checksum: 47947d0475c89c1da2c5f24c5ab9e4cf32a713a7ddfc3f36ce8cdbb3f42ec183
+- filename: KitchenDeployAndRun.sh
+  checksum: d7cb46105a82f9221aba243dbec41969f73c7afd1a12f31aacb288d7a9a4a36f
+- filename: RMIRegistryDeployAndRun.sh
+  checksum: 7160967523c90329ed8174d14135503d5ea57999028ca533f881a607cb2de2ec
+- filename: RegistryDeployAndRun.sh
+  checksum: acbedb0e215758bb4fb76457700affb70fd2cde4b2c1132f13e2028afd746f9a
+- filename: StudentDeployAndRun.sh
+  checksum: 648305046440e0b72b952863aa75a653cd8be2b4466674d9ae808adb3d77dfe5
+- filename: TableDeployAndRun.sh
+  checksum: b836894c8286bfdf93f97c785efbefff828ef421e869869a0a4fdb4c71411dd4
+- filename: WaiterDeployAndRun.sh
+  checksum: 3c630b1e916b7f5d8f413cb7b15fa1fffb75bd150e73fe8afd45b18e58dbca63
+- filename: password
+  checksum: 28412f0c5e82dfc7fa4ef5bd43b2071fd18f8b64c9c22b7acb2c4d19d4360dce
+version: "1.0"

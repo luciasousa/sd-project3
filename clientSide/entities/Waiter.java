@@ -210,7 +210,7 @@ public class Waiter extends Thread{
      *    Operation have all clients been served
      *
      *    Called by the waiter to check if all clients have been served
-     *    @return boolean
+     *    @return true if all clients have been served false otherwise
      */
     public boolean haveAllClientsBeenServed(){
         try {

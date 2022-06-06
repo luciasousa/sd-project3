@@ -142,6 +142,8 @@ public class Bar implements BarInterface{
      *    Called by the waiter to look around
      *    waits until has requests
      *    @return the request read from the queue
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized Request lookAround() throws RemoteException
@@ -177,7 +179,10 @@ public class Bar implements BarInterface{
      *    puts a request for the waiter 
      *    signals waiter 
      *    while students are waiting to take a seat at the table
+     *    @param studentID student id
      *    @return array of the students IDs in order of arrival
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public int[] enter(int studentID) throws RemoteException
@@ -214,6 +219,8 @@ public class Bar implements BarInterface{
      *    Operation return to bar
      *
      *    Called by the waiter to return to the bar
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void returnToBar() throws RemoteException
@@ -231,6 +238,10 @@ public class Bar implements BarInterface{
      *    puts a request for the waiter
      *    signals waiter waiting in lookaround
      *    while students are waiting in the table for waiter to get the pad
+     *    @param studentID student id
+     *    @param studentState student state
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public void callWaiter(int studentID, int studentState) throws RemoteException
@@ -257,6 +268,8 @@ public class Bar implements BarInterface{
      *    puts a request for the waiter
      *    signals waiter waiting in lookaround
      *    while chef is waiting in the kitchen for the collection
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public void alertTheWaiter() throws RemoteException
@@ -285,6 +298,8 @@ public class Bar implements BarInterface{
      *
      *    Called by the waiter to collect portion
      *    and informing chef in the kitchen that portion was collected
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public void collectPortion() throws RemoteException
@@ -306,6 +321,9 @@ public class Bar implements BarInterface{
      *    Called by the last student to signal the waiter after everybody eaten and is time to pay
      *    puts a request for the waiter
      *    signals waiter waiting in lookaround
+     *    @param studentID student id
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      *    
      */
     public void signalTheWaiter(int studentID) throws RemoteException
@@ -329,6 +347,8 @@ public class Bar implements BarInterface{
      *    Operation prepare the bill
      *
      *    Called by the waiter to prepare the bill
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void prepareTheBill() throws RemoteException
@@ -346,6 +366,9 @@ public class Bar implements BarInterface{
      *    puts a request for the waiter
      *    signals waiter waiting in lookaround
      *    waits for waiter to say goodbye 
+     *    @param studentID student id
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public void exit(int studentID) throws RemoteException
@@ -384,6 +407,8 @@ public class Bar implements BarInterface{
      * 
      *    @param studentID student id
      *    @return number of students in restuarant
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      *    
      */
     public synchronized int sayGoodbye(int studentID) throws RemoteException
@@ -399,6 +424,8 @@ public class Bar implements BarInterface{
      *  Operation end of work.
      *
      *   New operation.
+     *   @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      *
     */
     public synchronized void endOperation () throws RemoteException
@@ -417,12 +444,14 @@ public class Bar implements BarInterface{
      *   Operation server shutdown.
      *
      *   New operation.
+     *   @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      */
     public synchronized void shutdown () throws RemoteException
     {
         nEntities += 1;
         if (nEntities >= Constants.EB)
-            ServerBar.waitConnection = false;
+            ServerBar.shutdown();
         notifyAll ();                                        // the bar may now terminate
     }
 

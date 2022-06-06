@@ -145,6 +145,10 @@ public class Table implements TableInterface{
      *    Operation take a seat
      *
      *    Called by the student to take a seat at the table
+     *    @param studentID student id
+     *    @param studentState student state
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      */
     public synchronized void takeASeat(int studentID, int studentState) throws RemoteException
     {
@@ -166,6 +170,8 @@ public class Table implements TableInterface{
      *    Called by the waiter to salute the client
      * 
      *    @param studentID the ID of the student to be saluted by the waiter
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      */
     public synchronized void saluteTheClient(int studentID) throws RemoteException
     {
@@ -190,7 +196,9 @@ public class Table implements TableInterface{
      *    Operation read menu
      *
      *    Called by the student to read the menu, wakes up waiter to signal that he has read the menu
-     * 
+     *    @param studentID student id
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      */
     public synchronized void readMenu(int studentID) throws RemoteException
     {
@@ -209,6 +217,9 @@ public class Table implements TableInterface{
      *
      *    Called by the first student to arrive to prepare the order
      *    waits until gets the choices from companions
+     *    @param studentID student id
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void prepareTheOrder(int studentID) throws RemoteException
@@ -233,6 +244,9 @@ public class Table implements TableInterface{
      *
      *    Called by the student (that was not the first to arrive) to inform companion
      *    Signal first student that it has been informed and waits for the course to be ready
+     *    @param studentID student id
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void informCompanion(int studentID) throws RemoteException
@@ -261,6 +275,9 @@ public class Table implements TableInterface{
      *
      *    Called by the first student to arrive to add up the companion's choice to the order
      *    waits until gets the choices from companions
+     *    @param studentID student id
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void addUpOnesChoice(int studentID) throws RemoteException
@@ -281,6 +298,10 @@ public class Table implements TableInterface{
      *
      *    Called by the student when students calls the waiter
      *    waits until waiter has the pad
+     *    @param studentID student id
+     *    @param studentState student state
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void waitForPad(int studentID, int studentState) throws RemoteException
@@ -301,6 +322,8 @@ public class Table implements TableInterface{
      *
      *    Called by the waiter to get the pad
      *    signal student that he got the pad and waits until student describes the order
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void getThePad() throws RemoteException
@@ -327,6 +350,8 @@ public class Table implements TableInterface{
      *
      *    Called by the first student to arrive to describe the order
      *    signals waiter that the order was described
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void describeTheOrder() throws RemoteException
@@ -340,7 +365,9 @@ public class Table implements TableInterface{
      *    Operation has everybody chosen
      *
      *    Called by the first student to arrive to check if every companion has chosen
-     *    @return boolean
+     *    @return true if everybody has chosen false otherwise
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized boolean hasEverybodyChosen() throws RemoteException
@@ -354,6 +381,9 @@ public class Table implements TableInterface{
      *
      *    Called by the first student to arrive to join the talk
      *    waits until course is ready
+     *    @param studentID student id
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void joinTheTalk(int studentID) throws RemoteException
@@ -379,6 +409,8 @@ public class Table implements TableInterface{
      *    Called by the waiter to deliver portion
      *    signals students that portion was delivered
      *    waits for all students to eat the course
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void deliverPortion() throws RemoteException
@@ -410,7 +442,9 @@ public class Table implements TableInterface{
      *    Operation have all clients been served
      *
      *    Called by the waiter to check if all clients have been served
-     *    @return boolean
+     *    @return true if all clients have been served
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      */
     public boolean haveAllClientsBeenServed() throws RemoteException
     {
@@ -422,6 +456,9 @@ public class Table implements TableInterface{
      *
      *    Called by the student to start eating
      *    waits a random time
+     *    @param studentID student id
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void startEating(int studentID) throws RemoteException
@@ -442,6 +479,9 @@ public class Table implements TableInterface{
      *    Operation end eating
      *
      *    Called by the student to end eating
+     *    @param studentID student id
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void endEating(int studentID) throws RemoteException
@@ -461,7 +501,9 @@ public class Table implements TableInterface{
      *    signals waiter that everybody finished eating
      *    waits for next course to be ready
      * 
-     *    @return boolean
+     *    @return true if everybody finished false otherwise
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      */
     public synchronized boolean hasEverybodyFinished() throws RemoteException
     {
@@ -478,6 +520,8 @@ public class Table implements TableInterface{
      *    Operation wait For Everybody To Finish
      *
      *    Called by the student to wait for the rest of the students to end eating.
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      */
     public synchronized void waitForEverybodyToFinish() throws RemoteException
     {
@@ -496,6 +540,9 @@ public class Table implements TableInterface{
      *    Operation wait For Course To Be Ready
      *
      *    Called by the student to wait for next course.
+     *    @param studentID student id
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      */
     public synchronized void waitForCourseToBeReady(int studentID) throws RemoteException
     {
@@ -515,6 +562,9 @@ public class Table implements TableInterface{
      *
      *    Called by the students(except for the last one) to wait for payment
      *    students wait for last student to pay the bill
+     *    @param studentID student id
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void waitForPayment(int studentID) throws RemoteException
@@ -536,6 +586,8 @@ public class Table implements TableInterface{
      *    Called by the waiter to present the bill
      *    signals last student that bill is ready
      *    waits for student to pay
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void presentTheBill() throws RemoteException
@@ -563,6 +615,9 @@ public class Table implements TableInterface{
      *
      *    Called by the last student to arrive to pay the bill
      *    student waits for the bill to be ready
+     *    @param studentID student id
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void shouldHaveArrivedEarlier(int studentID) throws RemoteException
@@ -587,6 +642,8 @@ public class Table implements TableInterface{
      *
      *    Called by the last student to arrive to honour the bill
      *    signals the rest of the students that he/she has paid the bill
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      * 
      */
     public synchronized void honourTheBill() throws RemoteException
@@ -597,37 +654,40 @@ public class Table implements TableInterface{
     }
 
      /**
-   *  Operation end of work.
-   *
-   *   New operation.
-   *
-   */
-
-   public synchronized void endOperation () throws RemoteException
-   {
-      while (nEntities == 0)
-      { 
-        try
-        { wait ();
+     *  Operation end of work.
+     *
+     *   New operation.
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
+     *
+     */
+    public synchronized void endOperation () throws RemoteException
+    {
+        while (nEntities == 0)
+        { 
+            try
+            { wait ();
+            }
+            catch (InterruptedException e) {}
         }
-        catch (InterruptedException e) {}
-      }
-      for(int i = 0; i < Constants.N; i++){
-          student[i].interrupt ();
-      }
-   }
+        for(int i = 0; i < Constants.N; i++){
+            student[i].interrupt ();
+        }
+    }
 
     /**
      *   Operation server shutdown.
      *
      *   New operation.
+     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
+     *                             service fails
      */
 
     public synchronized void shutdown () throws RemoteException
     {
         nEntities += 1;
         if (nEntities >= Constants.ET)
-            ServerTable.waitConnection = false;
+            ServerTable.shutdown();
         notifyAll ();                                        // the table may now terminate
     }
 }
