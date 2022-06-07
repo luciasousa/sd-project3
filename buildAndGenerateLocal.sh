@@ -15,10 +15,10 @@ echo "  General Repository of Information"
 rm -rf dirGeneralRepos/serverSide dirGeneralRepos/clientSide dirGeneralRepos/interfaces
 mkdir -p dirGeneralRepos/serverSide dirGeneralRepos/serverSide/main dirGeneralRepos/serverSide/objects dirGeneralRepos/interfaces \
          dirGeneralRepos/clientSide dirGeneralRepos/clientSide/entities
-cp serverSide/main/SimulPar.class serverSide/main/ServerSleepingBarbersGeneralRepos.class dirGeneralRepos/serverSide/main
+cp serverSide/main/Constants.class serverSide/main/ServerGeneralRepos.class dirGeneralRepos/serverSide/main
 cp serverSide/objects/GeneralRepos.class dirGeneralRepos/serverSide/objects
 cp interfaces/Register.class interfaces/GeneralReposInterface.class dirGeneralRepos/interfaces
-cp clientSide/entities/BarberStates.class clientSide/entities/CustomerStates.class dirGeneralRepos/clientSide/entities
+cp clientSide/entities/WaiterStates.class clientSide/entities/ChefStates.class clientSide/entities/StudentStates.class dirGeneralRepos/clientSide/entities
 echo "  Bar"
 rm -rf dirBar/serverSide dirBar/clientSide dirBar/interfaces dirBar/commInfra
 mkdir -p dirBar/serverSide dirBar/serverSide/main dirBar/serverSide/objects dirBar/interfaces \
@@ -71,7 +71,7 @@ cp clientSide/main/ClientStudent.class dirStudent/clientSide/main
 cp clientSide/entities/Student.class clientSide/entities/StudentStates.class dirStudent/clientSide/entities
 cp interfaces/TableInterface.class interfaces/GeneralReposInterface.class dirStudent/interfaces
 echo "Compressing execution environments."
-echo " Genclass"
+echo "  Genclass"
 rm -f genclass.zip
 zip -rq genclass.zip genclass
 echo "  RMI registry"
