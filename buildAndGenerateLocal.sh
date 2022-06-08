@@ -114,7 +114,6 @@ cp dirWaiter.zip ~/test/Restaurant
 cp dirStudent.zip ~/test/Restaurant
 cd ~/test/Restaurant
 unzip -q dirRegistry.zip
-mv set_rmiregistry_alt.sh ~/
 unzip -q dirGeneralRepos.zip
 unzip -q dirBar.zip
 unzip -q dirKitchen.zip
