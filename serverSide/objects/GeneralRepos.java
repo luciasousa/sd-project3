@@ -130,7 +130,7 @@ public class GeneralRepos implements GeneralReposInterface{
         if(chefState!=state){
             chefState = state;
             reportStatus();
-            //System.out.printf("Set Chef: %d; %d\n", numberOfCourse, numberOfPortion);
+            System.out.printf("Set Chef: %d; %d\n", numberOfCourse, numberOfPortion);
         }
    }
 
@@ -146,7 +146,7 @@ public class GeneralRepos implements GeneralReposInterface{
         if(waiterState!=state){
             waiterState = state;
             reportStatus();
-            //System.out.printf("Set Waiter: %d; %d\n", numberOfCourse, numberOfPortion);
+            System.out.printf("Set Waiter: %d; %d\n", numberOfCourse, numberOfPortion);
         }
     }
 
@@ -163,7 +163,7 @@ public class GeneralRepos implements GeneralReposInterface{
         {
             studentState[studentID] = state;
             reportStatus();
-            //System.out.printf("Set Student: %d; %d\n", numberOfCourse, numberOfPortion);
+            System.out.printf("Set Student: %d; %d\n", numberOfCourse, numberOfPortion);
         }
     }
 
@@ -185,7 +185,7 @@ public class GeneralRepos implements GeneralReposInterface{
             studentState[sID] = sState;
             waiterState = wState;
             chefState = cState;
-            //System.out.printf("Set All: %d; %d\n", numberOfCourse, numberOfPortion);
+            System.out.printf("Set All: %d; %d\n", numberOfCourse, numberOfPortion);
             reportStatus();
         }
     }
@@ -245,7 +245,7 @@ public class GeneralRepos implements GeneralReposInterface{
         numberOfPortion = nPortions;
         numberOfCourse = nCourses;
         reportStatus();
-        //System.out.printf("Set Chef port course: %d; %d\n", numberOfCourse, numberOfPortion);
+        System.out.printf("Set Chef port course: %d; %d\n", numberOfCourse, numberOfPortion);
     }
 
     /**
@@ -262,7 +262,7 @@ public class GeneralRepos implements GeneralReposInterface{
         chefState = state;
         numberOfPortion = nPortions;
         reportStatus();
-        //System.out.printf("Set chef port: %d; %d\n", numberOfCourse, numberOfPortion);
+        System.out.printf("Set chef port: %d; %d\n", numberOfCourse, numberOfPortion);
     }
 
     /**
@@ -281,7 +281,7 @@ public class GeneralRepos implements GeneralReposInterface{
         {
             if(id == seatOrder[i]) seatOrder[i] = -1;
         }
-        //System.out.printf("Set student leave: %d; %d\n", numberOfCourse, numberOfPortion);
+        System.out.printf("Set student leave: %d; %d\n", numberOfCourse, numberOfPortion);
         reportStatus();
     }
 

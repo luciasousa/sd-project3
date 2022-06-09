@@ -2,23 +2,26 @@ echo "Compiling source code."
 javac -cp genclass.jar */*.java */*/*.java
 echo "Distributing intermediate code to the different execution environments."
 echo "  RMI registry"
-rm -rf dirRMIRegistry/interfaces
-mkdir -p dirRMIRegistry/interfaces
+rm -rf dirRMIRegistry/interfaces dirRMIRegistry/commInfra
+mkdir -p dirRMIRegistry/interfaces dirRMIRegistry/commInfra
 cp interfaces/*.class dirRMIRegistry/interfaces
+cp commInfra/*.class dirRMIRegistry/commInfra
 echo "  Register Remote Objects"
-rm -rf dirRegistry/serverSide dirRegistry/interfaces
-mkdir -p dirRegistry/serverSide dirRegistry/serverSide/main dirRegistry/serverSide/objects dirRegistry/interfaces
+rm -rf dirRegistry/serverSide dirRegistry/interfaces dirRegistry/commInfra
+mkdir -p dirRegistry/serverSide dirRegistry/serverSide/main dirRegistry/serverSide/objects dirRegistry/interfaces dirRegistry/commInfra
 cp serverSide/main/ServerRegisterRemoteObject.class dirRegistry/serverSide/main
 cp serverSide/objects/RegisterRemoteObject.class dirRegistry/serverSide/objects
 cp interfaces/Register.class dirRegistry/interfaces
+cp commInfra/*.class dirRegistry/commInfra
 echo "  General Repository of Information"
-rm -rf dirGeneralRepos/serverSide dirGeneralRepos/clientSide dirGeneralRepos/interfaces
+rm -rf dirGeneralRepos/serverSide dirGeneralRepos/clientSide dirGeneralRepos/interfaces dirGeneralRepos/commInfra
 mkdir -p dirGeneralRepos/serverSide dirGeneralRepos/serverSide/main dirGeneralRepos/serverSide/objects dirGeneralRepos/interfaces \
-         dirGeneralRepos/clientSide dirGeneralRepos/clientSide/entities
+         dirGeneralRepos/clientSide dirGeneralRepos/clientSide/entities dirGeneralRepos/commInfra
 cp serverSide/main/Constants.class serverSide/main/ServerGeneralRepos.class dirGeneralRepos/serverSide/main
 cp serverSide/objects/GeneralRepos.class dirGeneralRepos/serverSide/objects
 cp interfaces/Register.class interfaces/GeneralReposInterface.class dirGeneralRepos/interfaces
 cp clientSide/entities/WaiterStates.class clientSide/entities/ChefStates.class clientSide/entities/StudentStates.class dirGeneralRepos/clientSide/entities
+cp commInfra/*.class dirGeneralRepos/commInfra
 echo "  Bar"
 rm -rf dirBar/serverSide dirBar/clientSide dirBar/interfaces dirBar/commInfra
 mkdir -p dirBar/serverSide dirBar/serverSide/main dirBar/serverSide/objects dirBar/interfaces \
@@ -47,29 +50,32 @@ cp interfaces/*.class dirKitchen/interfaces
 cp clientSide/entities/WaiterStates.class clientSide/entities/ChefStates.class dirKitchen/clientSide/entities
 cp commInfra/*.class dirKitchen/commInfra
 echo "  Chef"
-rm -rf dirChef/serverSide dirChef/clientSide dirChef/interfaces
+rm -rf dirChef/serverSide dirChef/clientSide dirChef/interfaces dirChef/commInfra
 mkdir -p dirChef/serverSide dirChef/serverSide/main dirChef/clientSide dirChef/clientSide/main dirChef/clientSide/entities \
-         dirChef/interfaces
+         dirChef/interfaces dirChef/commInfra
 cp serverSide/main/Constants.class dirChef/serverSide/main
 cp clientSide/main/ClientChef.class dirChef/clientSide/main
 cp clientSide/entities/Chef.class clientSide/entities/ChefStates.class dirChef/clientSide/entities
-cp interfaces/KitchenInterface.class interfaces/GeneralReposInterface.class dirChef/interfaces
+cp interfaces/*.class dirChef/interfaces
+cp commInfra/*.class dirChef/commInfra
 echo "  Waiter"
-rm -rf dirWaiter/serverSide dirWaiter/clientSide dirWaiter/interfaces
+rm -rf dirWaiter/serverSide dirWaiter/clientSide dirWaiter/interfaces dirWaiter/commInfra
 mkdir -p dirWaiter/serverSide dirWaiter/serverSide/main dirWaiter/clientSide dirWaiter/clientSide/main dirWaiter/clientSide/entities \
-         dirWaiter/interfaces
+         dirWaiter/interfaces dirWaiter/commInfra
 cp serverSide/main/Constants.class dirWaiter/serverSide/main
 cp clientSide/main/ClientWaiter.class dirWaiter/clientSide/main
 cp clientSide/entities/Waiter.class clientSide/entities/WaiterStates.class dirWaiter/clientSide/entities
 cp interfaces/*.class dirWaiter/interfaces
+cp commInfra/*.class dirWaiter/commInfra
 echo "  Student"
-rm -rf dirStudent/serverSide dirStudent/clientSide dirStudent/interfaces
+rm -rf dirStudent/serverSide dirStudent/clientSide dirStudent/interfaces dirStudent/commInfra
 mkdir -p dirStudent/serverSide dirStudent/serverSide/main dirStudent/clientSide dirStudent/clientSide/main dirStudent/clientSide/entities \
-         dirStudent/interfaces
+         dirStudent/interfaces dirStudent/commInfra
 cp serverSide/main/Constants.class dirStudent/serverSide/main
 cp clientSide/main/ClientStudent.class dirStudent/clientSide/main
 cp clientSide/entities/Student.class clientSide/entities/StudentStates.class dirStudent/clientSide/entities
-cp interfaces/TableInterface.class interfaces/GeneralReposInterface.class dirStudent/interfaces
+cp interfaces/*.class dirStudent/interfaces
+cp commInfra/*.class dirStudent/commInfra
 echo "Compressing execution environments."
 echo "  Genclass"
 rm -f genclass.zip

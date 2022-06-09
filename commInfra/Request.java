@@ -1,12 +1,14 @@
 package commInfra;
 
+import java.io.Serializable;
+
 /**
  *   Request class.
  *
  *   Used to represnt a request that is made to the waiter.
  * 
  */
-public class Request {
+public class Request implements Serializable{
     /**
      *  Request id.
      */

@@ -1,11 +1,11 @@
 package serverSide.objects;
-import commInfra.*;
-import java.rmi.registry.*;
+import commInfra.MemException;
+import commInfra.MemFIFO;
+import commInfra.Request;
 import java.rmi.*;
 import interfaces.*;
 import serverSide.main.*;
 import clientSide.entities.*;
-import genclass.GenericIO;
 
 /**
  *    Bar
@@ -152,12 +152,12 @@ public class Bar implements BarInterface{
         waiterState = WaiterStates.APPST;
         reposInterface.setWaiterState(waiterState);
         
-        //System.out.println("waiter looking");
+        System.out.println("waiter looking");
         while(numberOfPendingServiceRequests == 0) {
             try {
                 wait();
             } catch (Exception e) {
-                //System.out.println("Thread interrupted");
+                System.out.println("Thread interrupted");
             }
         }
         Request request = null;
@@ -166,8 +166,8 @@ public class Bar implements BarInterface{
         } catch (MemException e) {
             e.printStackTrace();
         }
-        //System.out.print(request.getRequestID());
-        //System.out.println(" - " + request.getRequestType());
+        System.out.print(request.getRequestID());
+        System.out.println(" - " + request.getRequestType());
         numberOfPendingServiceRequests--;
         return request;
     }
@@ -193,14 +193,14 @@ public class Bar implements BarInterface{
             studentState[studentID] = StudentStates.TKSTT;
             reposInterface.setSeatOrder(studentID);
             reposInterface.setStudentState(studentID, studentState[studentID]);
-            //System.out.printf("student %d enters\n", studentID);
+            System.out.printf("student %d enters\n", studentID);
             try {
                 arrivalQueue.write(studentID);
             } catch (MemException e1) {
                 e1.printStackTrace();
             }
             studentsArrival[numberOfStudentsInRestaurant] = studentID;
-            //System.out.printf("studentsArrival[%d] = %d\n", numberOfStudentsInRestaurant, studentsArrival[numberOfStudentsInRestaurant]);
+            System.out.printf("studentsArrival[%d] = %d\n", numberOfStudentsInRestaurant, studentsArrival[numberOfStudentsInRestaurant]);
             numberOfStudentsInRestaurant++;
             Request r = new Request(studentID, 'c');
             numberOfPendingServiceRequests++;
@@ -225,7 +225,7 @@ public class Bar implements BarInterface{
      */
     public synchronized void returnToBar() throws RemoteException
     {
-        //System.out.println("waiter is returning to bar");
+        System.out.println("waiter is returning to bar");
         waiter = Thread.currentThread();
         waiterState = WaiterStates.APPST;
         reposInterface.setWaiterState(waiterState);
@@ -246,7 +246,7 @@ public class Bar implements BarInterface{
      */
     public void callWaiter(int studentID, int studentState) throws RemoteException
     {
-        //System.out.println("waiter was called");
+        System.out.println("waiter was called");
         synchronized(this) 
         {
             Request r = new Request(studentID, 'o');
@@ -288,7 +288,7 @@ public class Bar implements BarInterface{
                 e.printStackTrace();
             }
             notifyAll();
-            //System.out.println("chef alerts the waiter");
+            System.out.println("chef alerts the waiter");
         }
         kitchenInterface.chefWaitForCollection(chefState);
     }
@@ -304,7 +304,7 @@ public class Bar implements BarInterface{
      */
     public void collectPortion() throws RemoteException
     {
-        //System.out.println("waiter is collecting portion");
+        System.out.println("waiter is collecting portion");
         synchronized(this)
         {
             waiter = Thread.currentThread();
@@ -330,7 +330,7 @@ public class Bar implements BarInterface{
     {
         synchronized(this) 
         {
-            //System.out.println("waiter has been signaled");
+            System.out.println("waiter has been signaled");
             //bill presentation
             Request r = new Request(studentID, 'b');
             numberOfPendingServiceRequests += 1;
@@ -356,7 +356,7 @@ public class Bar implements BarInterface{
         waiter = Thread.currentThread();
         waiterState = WaiterStates.PRCBL;
         reposInterface.setWaiterState(waiterState);
-        //System.out.println("waiter preparing the bill");
+        System.out.println("waiter preparing the bill");
     }
 
     /**
@@ -386,6 +386,7 @@ public class Bar implements BarInterface{
             notifyAll();
             student[studentID] = Thread.currentThread();
             studentState[studentID] = StudentStates.GGHOM;
+            System.out.printf("id: %d\n", studentID);
             reposInterface.setStudentStateAndLeave(studentID, studentState[studentID]);
             while(!clientsGoodbye[studentID])
             {
@@ -395,7 +396,7 @@ public class Bar implements BarInterface{
                     e.printStackTrace();
                 }
             }
-            //System.out.printf("student %d going home\n",studentID);
+            System.out.printf("student %d going home\n",studentID);
         }        
     }
 
@@ -413,7 +414,7 @@ public class Bar implements BarInterface{
      */
     public synchronized int sayGoodbye(int studentID) throws RemoteException
     {
-        //System.out.printf("saying goodbye to student %d\n", studentID);
+        System.out.printf("saying goodbye to student %d\n", studentID);
         clientsGoodbye[studentID] = true;
         notifyAll();
         numberOfStudentsInRestaurant--;
