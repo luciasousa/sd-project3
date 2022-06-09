@@ -61,7 +61,7 @@ mkdir -p dirWaiter/serverSide dirWaiter/serverSide/main dirWaiter/clientSide dir
 cp serverSide/main/Constants.class dirWaiter/serverSide/main
 cp clientSide/main/ClientWaiter.class dirWaiter/clientSide/main
 cp clientSide/entities/Waiter.class clientSide/entities/WaiterStates.class dirWaiter/clientSide/entities
-cp interfaces/BarInterface.class interfaces/GeneralReposInterface.class dirWaiter/interfaces
+cp interfaces/*.class dirWaiter/interfaces 
 echo "  Student"
 rm -rf dirStudent/serverSide dirStudent/clientSide dirStudent/interfaces
 mkdir -p dirStudent/serverSide dirStudent/serverSide/main dirStudent/clientSide dirStudent/clientSide/main dirStudent/clientSide/entities \

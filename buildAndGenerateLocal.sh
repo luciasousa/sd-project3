@@ -61,7 +61,7 @@ mkdir -p dirWaiter/serverSide dirWaiter/serverSide/main dirWaiter/clientSide dir
 cp serverSide/main/Constants.class dirWaiter/serverSide/main
 cp clientSide/main/ClientWaiter.class dirWaiter/clientSide/main
 cp clientSide/entities/Waiter.class clientSide/entities/WaiterStates.class dirWaiter/clientSide/entities
-cp interfaces/BarInterface.class interfaces/GeneralReposInterface.class dirWaiter/interfaces
+cp interfaces/*.class dirWaiter/interfaces
 echo "  Student"
 rm -rf dirStudent/serverSide dirStudent/clientSide dirStudent/interfaces
 mkdir -p dirStudent/serverSide dirStudent/serverSide/main dirStudent/clientSide dirStudent/clientSide/main dirStudent/clientSide/entities \
@@ -104,6 +104,7 @@ zip -rq dirStudent.zip dirStudent
 echo "Deploying and decompressing execution environments."
 mkdir -p ~/test/Restaurant
 rm -rf ~/test/Restaurant/*
+cp genclass.zip ~/test/Restaurant
 cp dirRegistry.zip ~/test/Restaurant
 cp dirGeneralRepos.zip ~/test/Restaurant
 cp dirBar.zip ~/test/Restaurant
@@ -112,7 +113,9 @@ cp dirTable.zip ~/test/Restaurant
 cp dirChef.zip ~/test/Restaurant
 cp dirWaiter.zip ~/test/Restaurant
 cp dirStudent.zip ~/test/Restaurant
+cp dirRMIRegistry.zip ~/test/Restaurant
 cd ~/test/Restaurant
+unzip -q genclass.zip
 unzip -q dirRegistry.zip
 unzip -q dirGeneralRepos.zip
 unzip -q dirBar.zip
@@ -121,3 +124,31 @@ unzip -q dirTable.zip
 unzip -q dirWaiter.zip
 unzip -q dirChef.zip
 unzip -q dirStudent.zip
+unzip -q dirRMIRegistry.zip
+cp genclass.zip ~/test/Restaurant/dirBar
+cp genclass.zip ~/test/Restaurant/dirKitchen
+cp genclass.zip ~/test/Restaurant/dirTable
+cp genclass.zip ~/test/Restaurant/dirWaiter
+cp genclass.zip ~/test/Restaurant/dirStudent
+cp genclass.zip ~/test/Restaurant/dirChef
+cp genclass.zip ~/test/Restaurant/dirGeneralRepos
+cp genclass.zip ~/test/Restaurant/dirRegistry
+cp genclass.zip ~/test/Restaurant/dirRMIRegistry
+cd dirBar
+unzip -q genclass.zip
+cd ../dirKitchen
+unzip -q genclass.zip
+cd ../dirTable
+unzip -q genclass.zip
+cd ../dirChef
+unzip -q genclass.zip
+cd ../dirWaiter
+unzip -q genclass.zip
+cd ../dirStudent
+unzip -q genclass.zip
+cd ../dirGeneralRepos
+unzip -q genclass.zip
+cd ../dirRegistry
+unzip -q genclass.zip
+cd ../dirRMIRegistry
+unzip -q genclass.zip

@@ -35,7 +35,7 @@ public class ServerBar {
        int portNumbTable = -1;
        int portNumbKitchen = -1;
 
-       if (args.length != 5)
+       if (args.length != 3)
           { GenericIO.writelnString ("Wrong number of parameters!");
             System.exit (1);
           }
@@ -62,29 +62,6 @@ public class ServerBar {
         { GenericIO.writelnString ("args[2] is not a valid port number!");
         System.exit (1);
         }
-        try
-        { portNumbTable = Integer.parseInt (args[3]);
-        }
-        catch (NumberFormatException e)
-        { GenericIO.writelnString ("args[3] is not a number!");
-        System.exit (1);
-        }
-        if ((portNumbTable < 4000) || (portNumbTable >= 65536))
-        { GenericIO.writelnString ("args[3] is not a valid port number!");
-        System.exit (1);
-        }
-        try
-        { portNumbKitchen = Integer.parseInt (args[4]);
-        }
-        catch (NumberFormatException e)
-        { GenericIO.writelnString ("args[4] is not a number!");
-        System.exit (1);
-        }
-        if ((portNumbKitchen < 4000) || (portNumbKitchen >= 65536))
-        { GenericIO.writelnString ("args[4] is not a valid port number!");
-        System.exit (1);
-        }
-
  
       /* create and install the security manager */
  
@@ -95,6 +72,8 @@ public class ServerBar {
       /* get a remote reference to the general repository object */
  
        String nameEntryGeneralRepos = "GeneralRepository";            // public name of the general repository object
+       String nameTable = "Table";
+       String nameKitchen = "Kitchen";
        GeneralReposInterface reposInterface = null;                        // remote reference to the general repository object
        Registry registry = null;                                      // remote reference for registration in the RMI registry service
  
@@ -123,30 +102,36 @@ public class ServerBar {
        }
 
        TableInterface tableInterface = null;
-       Table table = new Table(reposInterface);
 
        try
-       { tableInterface = (TableInterface) UnicastRemoteObject.exportObject (table, portNumbTable);
+       { tableInterface = (TableInterface) registry.lookup(nameTable);
        }
        catch (RemoteException e)
-       { GenericIO.writelnString ("Table stub generation exception: " + e.getMessage ());
+       { GenericIO.writelnString ("Table lookup exception: " + e.getMessage ());
          e.printStackTrace ();
          System.exit (1);
        }
-       GenericIO.writelnString ("Stub was generated!");
+       catch (NotBoundException e)
+       { GenericIO.writelnString ("Table not bound exception: " + e.getMessage ());
+         e.printStackTrace ();
+         System.exit (1);
+       }
 
        KitchenInterface kitchenInterface = null;
-       Kitchen kitchen = new Kitchen(reposInterface);
 
        try
-       { kitchenInterface = (KitchenInterface) UnicastRemoteObject.exportObject (kitchen, portNumbKitchen);
+       { kitchenInterface = (KitchenInterface) registry.lookup(nameKitchen);
        }
        catch (RemoteException e)
-       { GenericIO.writelnString ("Kitchen stub generation exception: " + e.getMessage ());
+       { GenericIO.writelnString ("Kitchen lookup exception: " + e.getMessage ());
          e.printStackTrace ();
          System.exit (1);
        }
-       GenericIO.writelnString ("Stub was generated!");
+       catch (NotBoundException e)
+       { GenericIO.writelnString ("Kitchen not bound exception: " + e.getMessage ());
+         e.printStackTrace ();
+         System.exit (1);
+       }
  
        /* instantiate a bar object */
        
