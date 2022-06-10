@@ -110,38 +110,16 @@ public class ClientChef
         }
 
         chef = new Chef (ChefStates.WAFOR, kitchenInterface, barInterface);
-
+        System.out.println("Start of the Simulation");
         /* start of the simulation */
         chef.start ();
 
         /* waiting for the end of the simulation */
-        while (chef.isAlive ())
-        {
-            { try
-            { kitchenInterface.endOperation ();
-            }
-            catch (RemoteException e)
-            { GenericIO.writelnString ("Chef generator remote exception on Kitchen endOperation: " + e.getMessage ());
-                System.exit (1);
-            }
-            Thread.yield ();
-            }
-            { try
-            { barInterface.endOperation ();
-            }
-            catch (RemoteException e)
-            { GenericIO.writelnString ("Chef generator remote exception on Bar endOperation: " + e.getMessage ());
-                System.exit (1);
-            }
-            Thread.yield ();
-            }
-            try
-            { chef.join ();
-            }
-            catch (InterruptedException e) {}
-            GenericIO.writelnString ("The chef has terminated.");
+        try
+        { chef.join ();
         }
-        GenericIO.writelnString ();
+        catch (InterruptedException e) {}
+        GenericIO.writelnString ("The chef has terminated.");
 
         try
         { kitchenInterface.shutdown ();
@@ -164,5 +142,6 @@ public class ClientChef
         { GenericIO.writelnString ("Chef generator remote exception on GeneralRepos shutdown: " + e.getMessage ());
             System.exit (1);
         }
+        System.out.println("End of the Simulation");
     }
 }

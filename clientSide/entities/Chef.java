@@ -67,27 +67,27 @@ public class Chef extends Thread{
      */
     public void run() 
     {
-        System.out.println("watch news");
+        //System.out.println("watch news");
         watchTheNews();
-        System.out.println("start preparation");
+        //System.out.println("start preparation");
         startPreparation();
         do 
         {
             if(!getFirstCourse()) startPreparation(); else setFirstCourse(false);
-            System.out.println("proceed to presentation");
+            //System.out.println("proceed to presentation");
             proceedToPresentation();
-            System.out.println("alert waiter");
+            //System.out.println("alert waiter");
             alertTheWaiter();
 
             while(!haveAllPortionsBeenDelivered()) {
-                System.out.println("have next portion ready");
+                //System.out.println("have next portion ready");
                 haveNextPortionReady();
-                System.out.println("alert waiter");
+                //System.out.println("alert waiter");
                 alertTheWaiter();
             }
 
         } while(!hasTheOrderBeenCompleted());
-        System.out.println("clean up");
+        //System.out.println("clean up");
         cleanUp();
     }
 

@@ -112,7 +112,8 @@ public class ClientStudent
 
         for (int i = 0; i < Constants.N; i++)
             student[i] = new Student (i,StudentStates.GGTRT,tableInterface,barInterface);
-
+        
+        System.out.println("Start of the Simulation");
         /* start of the simulation */
         for (int i = 0; i < Constants.N; i++)
             student[i].start();
@@ -120,35 +121,13 @@ public class ClientStudent
         /* waiting for the end of the simulation */
         for (int i = 0; i < Constants.N; i++)
         {
-            while (student[i].isAlive ())
-            {
-                { try
-                { tableInterface.endOperation ();
-                }
-                catch (RemoteException e)
-                { GenericIO.writelnString ("Student generator remote exception on Table endOperation: " + e.getMessage ());
-                    System.exit (1);
-                }
-                Thread.yield ();
-                }
-                { try
-                { barInterface.endOperation ();
-                }
-                catch (RemoteException e)
-                { GenericIO.writelnString ("Student generator remote exception on Bar endOperation: " + e.getMessage ());
-                    System.exit (1);
-                }
-                Thread.yield ();
-                }
-                try
-                { student[i].join ();
-                }
-                catch (InterruptedException e) {}
-                GenericIO.writelnString ("The student"+(i+1)+" has terminated.");
+            try
+            { student[i].join ();
             }
+            catch (InterruptedException e) {}
+            GenericIO.writelnString ("The student "+(i+1)+" has terminated.");
         }
-        GenericIO.writelnString ();
-
+        
         try
         { tableInterface.shutdown ();
         }
@@ -170,5 +149,7 @@ public class ClientStudent
         { GenericIO.writelnString ("Student generator remote exception on GeneralRepos shutdown: " + e.getMessage ());
             System.exit (1);
         }
+
+        System.out.println("End of the Simulation");
     }
 }

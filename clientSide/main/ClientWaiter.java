@@ -126,47 +126,16 @@ public class ClientWaiter
         }
 
         waiter = new Waiter (WaiterStates.APPST,barInterface, kitchenInterface, tableInterface);
-
+        System.out.println("Start of the Simulation");
         /* start of the simulation */
         waiter.start ();
 
         /* waiting for the end of the simulation */
-        while (waiter.isAlive ())
-        {
-            { try
-            { kitchenInterface.endOperation ();
-            }
-            catch (RemoteException e)
-            { GenericIO.writelnString ("Waiter generator remote exception on Kitchen endOperation: " + e.getMessage ());
-                System.exit (1);
-            }
-            Thread.yield ();
-            }
-            { try
-            { tableInterface.endOperation ();
-            }
-            catch (RemoteException e)
-            { GenericIO.writelnString ("Waiter generator remote exception on Table endOperation: " + e.getMessage ());
-                System.exit (1);
-            }
-            Thread.yield ();
-            }
-            { try
-            { barInterface.endOperation ();
-            }
-            catch (RemoteException e)
-            { GenericIO.writelnString ("Waiter generator remote exception on Bar endOperation: " + e.getMessage ());
-                System.exit (1);
-            }
-            Thread.yield ();
-            }
-            try
-            { waiter.join ();
-            }
-            catch (InterruptedException e) {}
-            GenericIO.writelnString ("The waiter has terminated.");
+        try
+        { waiter.join ();
         }
-        GenericIO.writelnString ();
+        catch (InterruptedException e) {}
+        GenericIO.writelnString ("The waiter has terminated.");
 
         try
         { kitchenInterface.shutdown ();
@@ -196,5 +165,6 @@ public class ClientWaiter
         { GenericIO.writelnString ("Waiter generator remote exception on GeneralRepos shutdown: " + e.getMessage ());
             System.exit (1);
         }
+        System.out.println("End of the Simulation");
     }
 }

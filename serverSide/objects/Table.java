@@ -153,7 +153,7 @@ public class Table implements TableInterface{
     public synchronized void takeASeat(int studentID, int studentState) throws RemoteException
     {
         student[studentID] = Thread.currentThread();
-        System.out.printf("student %d take a seat\n", studentID);
+        //System.out.printf("student %d take a seat\n", studentID);
         while(!clientsSaluted[studentID]) 
         {
             try {
@@ -179,7 +179,7 @@ public class Table implements TableInterface{
         waiterState = WaiterStates.PRSMN;
         reposInterface.setWaiterState(waiterState);
         
-        System.out.printf("waiter salute the client %d", studentID);
+        //System.out.printf("waiter salute the client %d", studentID);
         clientsSaluted[studentID] = true;
         notifyAll();
         while(!menuRead[studentID])
@@ -206,7 +206,7 @@ public class Table implements TableInterface{
         studentState[studentID] = StudentStates.SELCS;
         reposInterface.setStudentState(studentID, studentState[studentID]);
         
-        System.out.printf("student %d read menu\n", studentID);
+        //System.out.printf("student %d read menu\n", studentID);
         menuRead[studentID] = true;
         //signal waiter that menu was read
         notifyAll();
@@ -228,7 +228,7 @@ public class Table implements TableInterface{
         studentState[studentID] = StudentStates.OGODR;
         reposInterface.setStudentState(studentID, studentState[studentID]);
         
-        System.out.printf("student %d prepare the order\n", studentID);
+        //System.out.printf("student %d prepare the order\n", studentID);
         while (!wasInformed) 
         {    
             try {
@@ -256,7 +256,7 @@ public class Table implements TableInterface{
         studentState[studentID] = StudentStates.CHTWC;
         reposInterface.setStudentState(studentID, studentState[studentID]);
         
-        System.out.printf("student %d inform companion\n", studentID);
+        //System.out.printf("student %d inform companion\n", studentID);
         wasInformed = true;
         numberOfStudentsRequests += 1;
         notifyAll();
@@ -282,7 +282,7 @@ public class Table implements TableInterface{
      */
     public synchronized void addUpOnesChoice(int studentID) throws RemoteException
     {
-        System.out.printf("student %d has been informed\n", studentID);
+        //System.out.printf("student %d has been informed\n", studentID);
         while(!wasInformed)
         {
             try {
@@ -314,7 +314,7 @@ public class Table implements TableInterface{
                 e.printStackTrace();
             }
         }
-        System.out.println("waiter has the pad");
+        //System.out.println("waiter has the pad");
     }
 
     /**
@@ -332,7 +332,7 @@ public class Table implements TableInterface{
         waiterState = WaiterStates.TKODR;
         reposInterface.setWaiterState(waiterState);
         
-        System.out.println("waiter get the pad");
+        //System.out.println("waiter get the pad");
         waiterHasThePad = true;
         notifyAll(); 
         while(!orderDescribed)
@@ -356,7 +356,7 @@ public class Table implements TableInterface{
      */
     public synchronized void describeTheOrder() throws RemoteException
     {
-        System.out.println("order is described");
+        //System.out.println("order is described");
         orderDescribed = true;
         notifyAll();
     }
@@ -372,7 +372,7 @@ public class Table implements TableInterface{
      */
     public synchronized boolean hasEverybodyChosen() throws RemoteException
     {
-        System.out.printf("pedidos dos estudantes = %d\n", numberOfStudentsRequests);
+        //System.out.printf("pedidos dos estudantes = %d\n", numberOfStudentsRequests);
         if (numberOfStudentsRequests == Constants.N) return true; else return false;
     }
 
@@ -392,7 +392,7 @@ public class Table implements TableInterface{
         studentState[studentID] = StudentStates.CHTWC;
         reposInterface.setStudentState(studentID, studentState[studentID]);
         
-        System.out.println("first student has joined the talk");
+        //System.out.println("first student has joined the talk");
         while(!courseReady[numberOfCoursesDelivered])
         {
             try {
@@ -418,10 +418,10 @@ public class Table implements TableInterface{
         numberOfPortionsEaten = 0;
         numberOfPortionsDelivered += 1;
         hasEndedEating = false;
-        System.out.printf("waiter is delivering the portion %d\n", numberOfPortionsDelivered);
+        //System.out.printf("waiter is delivering the portion %d\n", numberOfPortionsDelivered);
         if(numberOfPortionsDelivered == Constants.N)
         {
-            System.out.printf("course nº %d finished\n", numberOfCoursesDelivered);
+            //System.out.printf("course nº %d finished\n", numberOfCoursesDelivered);
             courseReady[numberOfCoursesDelivered] = true;
             notifyAll();
             if(numberOfCoursesDelivered == Constants.M - 1) coursesCompleted = true;
@@ -467,7 +467,7 @@ public class Table implements TableInterface{
         studentState[studentID] = StudentStates.EJYML;
         reposInterface.setStudentState(studentID, studentState[studentID]);
 
-        System.out.printf("student %d has started eating, course: %d\n", studentID, numberOfCoursesDelivered);
+        //System.out.printf("student %d has started eating, course: %d\n", studentID, numberOfCoursesDelivered);
         try {
             wait((long) (1 + 500 * Math.random ()));
         } catch (InterruptedException e) {
@@ -491,7 +491,7 @@ public class Table implements TableInterface{
         studentState[studentID] = StudentStates.CHTWC;
         reposInterface.setStudentState(studentID, studentState[studentID]);
         
-        System.out.printf("student %d has finished eating\n",studentID);
+        //System.out.printf("student %d has finished eating\n",studentID);
     }
 
     /**
@@ -549,7 +549,7 @@ public class Table implements TableInterface{
         while(!(courseReady[numberOfCoursesDelivered] || coursesCompleted))
         {
             try {
-                System.out.printf("student %d waiting for course ...\n", studentID);
+                //System.out.printf("student %d waiting for course ...\n", studentID);
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -569,7 +569,7 @@ public class Table implements TableInterface{
      */
     public synchronized void waitForPayment(int studentID) throws RemoteException
     {
-        System.out.printf("Student %d is waiting for payment\n", studentID);
+        //System.out.printf("Student %d is waiting for payment\n", studentID);
         while(!studentHasPaid)
         {
             try {
@@ -597,7 +597,7 @@ public class Table implements TableInterface{
         reposInterface.setWaiterState(waiterState);
         //}
         
-        System.out.println("presenting the bill");
+        //System.out.println("presenting the bill");
         billReady = true;
         notifyAll();
         while(!studentHasPaid)
@@ -626,7 +626,7 @@ public class Table implements TableInterface{
         studentState[studentID] = StudentStates.PYTBL;
         reposInterface.setStudentState(studentID, studentState[studentID]);
 
-        System.out.printf("student %d should have arrived earlier, pay the bill\n",studentID);
+        //System.out.printf("student %d should have arrived earlier, pay the bill\n",studentID);
         while(!billReady)
         {
             try {
@@ -648,31 +648,9 @@ public class Table implements TableInterface{
      */
     public synchronized void honourTheBill() throws RemoteException
     {
-        System.out.println("bill has been honoured");
+        //System.out.println("bill has been honoured");
         studentHasPaid = true;
         notifyAll();
-    }
-
-     /**
-     *  Operation end of work.
-     *
-     *   New operation.
-     *    @throws RemoteException if either the invocation of the remote method, or the communication with the registry
-     *                             service fails
-     *
-     */
-    public synchronized void endOperation () throws RemoteException
-    {
-        while (nEntities == 0)
-        { 
-            try
-            { wait ();
-            }
-            catch (InterruptedException e) {}
-        }
-        for(int i = 0; i < Constants.N; i++){
-            student[i].interrupt ();
-        }
     }
 
     /**

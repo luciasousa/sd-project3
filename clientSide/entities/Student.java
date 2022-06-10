@@ -92,64 +92,64 @@ public class Student extends Thread{
      */
     public void run() 
     {
-        System.out.println("student walk a bit");
+        //System.out.println("student walk a bit");
         walkABit();
-        System.out.println("student enter");
+        //System.out.println("student enter");
         int[] orderOfArrival = enter(studentID);
-        System.out.println("student read menu");
+        //System.out.println("student read menu");
         readMenu(studentID);
         if (orderOfArrival[0] != studentID){
             informCompanion(studentID);
-            System.out.printf("student %d inform companion left the talk\n",studentID);
+            //System.out.printf("student %d inform companion left the talk\n",studentID);
         } 
         else
         {
-            System.out.printf("student %d prepare order\n", studentID);
+            //System.out.printf("student %d prepare order\n", studentID);
             prepareTheOrder(studentID);
             while(!hasEverybodyChosen()) {
-                System.out.printf("student %d add up ones choice\n", studentID);
+                //System.out.printf("student %d add up ones choice\n", studentID);
                 addUpOnesChoice(studentID);
             }
-            System.out.println("student is going to call the waiter");
+            //System.out.println("student is going to call the waiter");
             callWaiter(studentID, studentState);
-            System.out.printf("student %d describe order\n", studentID);
+            //System.out.printf("student %d describe order\n", studentID);
             describeTheOrder();
-            System.out.printf("student %d join talk\n", studentID);
+            //System.out.printf("student %d join talk\n", studentID);
             joinTheTalk(studentID);
         }
         
         for(int i=0; i< Constants.M; i++)
         {
-            System.out.printf("student %d start eating\n", studentID);
+            //System.out.printf("student %d start eating\n", studentID);
             startEating(studentID);
-            System.out.printf("student %d end eating\n", studentID);
+            //System.out.printf("student %d end eating\n", studentID);
             endEating(studentID);
             //wait for everyone to finish
             if(!hasEverybodyFinished()){
-                System.out.printf("student %d wait for everyone to finish\n", studentID);
+                //System.out.printf("student %d wait for everyone to finish\n", studentID);
                 waitForEverybodyToFinish();
             }
-            System.out.printf("student %d wait for course\n", studentID);
+            //System.out.printf("student %d wait for course\n", studentID);
             waitForCourseToBeReady(studentID);
         }
 
         if(orderOfArrival[Constants.N-1] != studentID){
-            System.out.printf("student %d wait for payment\n", studentID);
+            //System.out.printf("student %d wait for payment\n", studentID);
             waitForPayment(studentID);
         }
             
         
         if(orderOfArrival[Constants.N-1] == studentID) 
         {
-            System.out.printf("last student %d signal waiter\n", studentID);
+            //System.out.printf("last student %d signal waiter\n", studentID);
             signalTheWaiter(studentID);
-            System.out.printf("last student %d should have arrived earlier\n", studentID);
+            //System.out.printf("last student %d should have arrived earlier\n", studentID);
             shouldHaveArrivedEarlier(studentID);
-            System.out.printf("last student %d honour the bill\n", studentID);
+            //System.out.printf("last student %d honour the bill\n", studentID);
             honourTheBill();
         }
         exit(studentID);
-        System.out.printf("student %d exit\n", studentID);
+        //System.out.printf("student %d exit\n", studentID);
     }
 
     /**

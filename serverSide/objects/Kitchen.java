@@ -140,7 +140,7 @@ public class Kitchen implements KitchenInterface{
         chef = Thread.currentThread();
         chefState = ChefStates.WAFOR;
         reposInterface.setChefState(chefState);
-        System.out.println("chef watches the news");
+        //System.out.println("chef watches the news");
         while(!isNoteAvailable)
         {
             try{
@@ -149,7 +149,7 @@ public class Kitchen implements KitchenInterface{
                 e.printStackTrace();
             }
         }
-        System.out.println("chef has note");
+        //System.out.println("chef has note");
     }
     
     /**
@@ -163,7 +163,7 @@ public class Kitchen implements KitchenInterface{
      */
     public synchronized void handTheNoteToChef() throws RemoteException
     {
-        System.out.println("waiter hands the note to chef");
+        //System.out.println("waiter hands the note to chef");
         waiter = Thread.currentThread();
         waiterState = WaiterStates.PCODR;
         reposInterface.setWaiterState(waiterState);
@@ -192,7 +192,7 @@ public class Kitchen implements KitchenInterface{
      */
     public synchronized void chefWaitForCollection(int chefState) throws RemoteException
     {
-        System.out.println("chef waits for waiter to collect portion");
+        //System.out.println("chef waits for waiter to collect portion");
         while(!portionCollected)
         {
             try {
@@ -235,7 +235,7 @@ public class Kitchen implements KitchenInterface{
         reposInterface.setStatePortionsCourses(chefState, nPortions, nCourses);
         
         numberOfCoursesToDeliver--;
-        System.out.printf("chef starts preparation\n");
+        //System.out.printf("chef starts preparation\n");
         preparationStarted = true;
         notifyAll();
     }
@@ -256,7 +256,7 @@ public class Kitchen implements KitchenInterface{
         
         if(numberOfPortionsToDeliver!=0) numberOfPortionsToDeliver--;
         else numberOfPortionsToDeliver=Constants.N-1;
-        System.out.printf("chef proceeds to presentation, course %d, portion %d\n",numberOfCoursesToDeliver,numberOfPortionsToDeliver);
+        //System.out.printf("chef proceeds to presentation, course %d, portion %d\n",numberOfCoursesToDeliver,numberOfPortionsToDeliver);
     }
 
     /**
@@ -301,7 +301,7 @@ public class Kitchen implements KitchenInterface{
         nPortions += 1;
         reposInterface.setStatePortions(chefState, nPortions);
         numberOfPortionsToDeliver--;
-        System.out.printf("chef have next portion ready course %d, portion %d\n",numberOfCoursesToDeliver,numberOfPortionsToDeliver);
+        //System.out.printf("chef have next portion ready course %d, portion %d\n",numberOfCoursesToDeliver,numberOfPortionsToDeliver);
     }
 
     /**
@@ -321,7 +321,7 @@ public class Kitchen implements KitchenInterface{
         
         numberOfCoursesToDeliver--;
         numberOfPortionsToDeliver = Constants.N;
-        System.out.printf("chef continues preparation course %d, portion %d\n",numberOfCoursesToDeliver,numberOfPortionsToDeliver);
+        //System.out.printf("chef continues preparation course %d, portion %d\n",numberOfCoursesToDeliver,numberOfPortionsToDeliver);
     }
 
     /**
@@ -333,31 +333,11 @@ public class Kitchen implements KitchenInterface{
      */
     public synchronized void cleanUp() throws RemoteException
     {
-        System.out.println("chef cleans up");
+        //System.out.println("chef cleans up");
         chef = Thread.currentThread();
         chefState = ChefStates.CLSSV;
         reposInterface.setChefState(chefState);
     }
-
-    /**
-   *  Operation end of work.
-   *
-   *   New operation.
-   *   @throws RemoteException if either the invocation of the remote method, or the communication with the registry
-   *                             service fails
-   */
-
-   public synchronized void endOperation () throws RemoteException
-   {
-      while (nEntities == 0)
-      { 
-        try
-        { wait ();
-        }
-        catch (InterruptedException e) {}
-      }
-        chef.interrupt ();
-   }
 
     /**
      *   Operation server shutdown.

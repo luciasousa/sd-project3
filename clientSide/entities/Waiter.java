@@ -81,48 +81,48 @@ public class Waiter extends Thread{
             switch(r.getRequestType()) 
             {
                 case 'c': //client arriving
-                    System.out.println("client arriving - 'c'");
-                    System.out.printf("salute client %d\n",r.getRequestID());
+                    //System.out.println("client arriving - 'c'");
+                    //System.out.printf("salute client %d\n",r.getRequestID());
                     saluteTheClient(r.getRequestID());
-                    System.out.println("return to bar");
+                    //System.out.println("return to bar");
                     returnToBar();
                     break;
                 
                 case 'o': //order ready to be collected
-                    System.out.println("order ready to be collected - 'o'");
-                    System.out.println("get the pad");
+                    //System.out.println("order ready to be collected - 'o'");
+                    //System.out.println("get the pad");
                     getThePad();
-                    System.out.println("hand note to chef");
+                    //System.out.println("hand note to chef");
                     handTheNoteToChef();
-                    System.out.println("return to bar");
+                    //System.out.println("return to bar");
                     returnToBar();
                     break;
                 
                 case 'p': //portion ready to be collected
-                    System.out.println("portion ready to be collected - 'p'");
+                    //System.out.println("portion ready to be collected - 'p'");
                     if(!haveAllClientsBeenServed())
                     {
-                        System.out.println("collect portion");
+                        //System.out.println("collect portion");
                         collectPortion();
-                        System.out.println("deliver portion");
+                        //System.out.println("deliver portion");
                         deliverPortion();
-                        System.out.println("return to bar");
+                        //System.out.println("return to bar");
                         returnToBar();
                     }
                     break;
 
                 case 'b': //bill presentation
-                    System.out.println("bill presentation - 'b'");
-                    System.out.println("prepare bill");
+                    //System.out.println("bill presentation - 'b'");
+                    //System.out.println("prepare bill");
                     prepareTheBill();
-                    System.out.println("present bill");
+                    //System.out.println("present bill");
                     presentTheBill();
-                    System.out.println("return to bar");
+                    //System.out.println("return to bar");
                     returnToBar();
                     break;
                     
                 case 'g': //say goodbye to students
-                    System.out.println("say goodbye to students - 'g'");
+                    //System.out.println("say goodbye to students - 'g'");
                     int numberOfStudentsInRestaurant = sayGoodbye(r.getRequestID());
                     if(numberOfStudentsInRestaurant == 0) return;
             }
@@ -140,11 +140,11 @@ public class Waiter extends Thread{
         Request r = null;
         try {
             r = barInterface.lookAround();
-            System.out.printf("Request id: %d\n Request type: %c\n", r.getRequestID(), r.getRequestType());
+            //System.out.printf("Request id: %d\n Request type: %c\n", r.getRequestID(), r.getRequestType());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        System.out.println("look around was null");
+        //System.out.println("look around was null");
         return r;
     }
 

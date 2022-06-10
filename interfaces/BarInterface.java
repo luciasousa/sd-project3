@@ -130,15 +130,6 @@ public interface BarInterface extends Remote {
     public int sayGoodbye(int studentID) throws RemoteException;
 
     /**
-     *  Operation end of work.
-     *
-     *   New operation.
-     *   @throws RemoteException if either the invocation of the remote method, or the communication with the registry
-     *                             service fails
-    */
-    public void endOperation () throws RemoteException;
-
-    /**
      *   Operation server shutdown.
      *
      *   New operation.
