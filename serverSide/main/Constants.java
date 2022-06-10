@@ -22,7 +22,7 @@ public class Constants {
     /**
      *   Number of entities requesting shutdown of table.
      */
-    public static final int ET = 1;
+    public static final int ET = 2;
 
     /**
      *   Number of entities requesting shutdown of kitchen.

@@ -415,7 +415,7 @@ public class GeneralRepos implements GeneralReposInterface{
             if(seatOrder[i] != -1)
                 seats += String.format("\t%4d ", seatOrder[i]);
             else
-                seats += String.format("\t\t");
+                seats += String.format("\t");
         }
 
         lineStatus += seats;

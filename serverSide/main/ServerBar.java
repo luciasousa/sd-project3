@@ -32,8 +32,6 @@ public class ServerBar {
        int portNumb = -1;                                             // port number for listening to service requests
        String rmiRegHostName;                                         // name of the platform where is located the RMI registering service
        int rmiRegPortNumb = -1;                                       // port number where the registering service is listening to service requests
-       int portNumbTable = -1;
-       int portNumbKitchen = -1;
 
        if (args.length != 3)
           { GenericIO.writelnString ("Wrong number of parameters!");

@@ -7,4 +7,4 @@ sshpass -f password ssh sd105@l040101-ws01.ua.pt 'cd test/Restaurant ; unzip -uq
 echo "Executing program at the general repository node."
 sshpass -f password ssh sd105@l040101-ws01.ua.pt 'cd test/Restaurant/dirGeneralRepos ; ./repos_com_d.sh sd105'
 echo "Server shutdown."
-sshpass -f password ssh sd105@l040101-ws01.ua.pt 'cd test/Restaurant/dirGeneralRepos ; less stat'
+sshpass -f password ssh sd105@l040101-ws01.ua.pt 'cd test/Restaurant/dirGeneralRepos ;'

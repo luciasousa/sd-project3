@@ -1,1 +1,1 @@
-java clientSide.main.ClientWaiter localhost 22150 stat 3
+java clientSide.main.ClientWaiter localhost 22150 
