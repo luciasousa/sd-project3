@@ -73,7 +73,7 @@ public class Chef extends Thread{
         startPreparation();
         do 
         {
-            if(!getFirstCourse()) startPreparation(); else setFirstCourse(false);
+            if(!getFirstCourse()) continuePreparation(); else setFirstCourse(false);
             //System.out.println("proceed to presentation");
             proceedToPresentation();
             //System.out.println("alert waiter");
